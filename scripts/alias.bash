@@ -29,15 +29,6 @@ alias sketchtool="$(mdfind kMDItemCFBundleIdentifier == 'com.bohemiancoding.sket
 
 ################################
 
-# FOREMAN
-alias foreman-web="cd $HOME/opallabs/cabochon && foreman start -m web=1"
-alias foreman-universe="cd $HOME/opallabs/cabochon && foreman start -m universe=1"
-alias start-juggernaut="cd $HOME/opallabs/cabochon && REDIS_HOST=localhost REDIS_PORT=6379 n use 5.2.0 packages/juggernaut/server.js --port $JUGGERNAUT_PORT"
-alias foreman-other="cd $HOME/opallabs/cabochon && foreman start -m all=1,techdocs=0,storybook=0,snapshots=0,web=0,universe=0,io=0,hydra=0,juggernaut=0"
-alias foreman-storybook="cd $HOME/opallabs/cabochon && foreman start -m storybook=1"
-
-################################
-
 # # DOCKER
 # ​
 # # remove all images from docker - frees up allocated hard drive space
@@ -72,6 +63,7 @@ alias run:get-storybook-pid='get-container-pid "opal_storybook"'
 # # start sh session inside docker service
 alias start:monolith-sh='docker exec -it opal_monolith.1.$(run:get-monolith-pid) sh'
 alias start:universe-sh='docker exec -it opal_universe.1.$(run:get-universe-pid) sh'
+alias start:universe-sh-temporary'docker exec -it opal_universe.1.$(docker service ps -f "desired-state=running" -q "opal_universe" | cut -d: -f1) sh'
 alias start:universe-shell-sh='docker exec -it opal_universe-shell.1.$(run:get-universe-shell-pid) sh'
 alias start:storybook-sh='docker exec -it opal_storybook.1.$(run:get-storybook-pid) sh'
 # ​
@@ -89,6 +81,8 @@ alias start:universe-storybook='docker service scale opal_universe-storybook=1'
 alias stop:universe-storybook='docker service scale opal_universe-storybook=0'
 alias start:lapidary-storybook='docker service scale opal_lapidary-storybook=1'
 alias stop:lapidary-storybook='docker service scale opal_lapidary-storybook=0'
+alias start:cassini-storybook='docker service scale opal_cassini-storybook=1'
+alias stop:cassini-storybook='docker service scale opal_cassini-storybook=0'
 # ​
 # # rails console and debugging commands
 alias start:rails-console='yarn docker:rails:console'
@@ -98,3 +92,12 @@ alias stop:rails-debug='yarn docker:rails:debug_monolith:stop'
 # # ngrok
 alias ngrok='~/ngrok'
 
+
+################################
+
+# FOREMAN
+alias foreman-web="cd $HOME/opallabs/cabochon && foreman start -m web=1"
+alias foreman-universe="cd $HOME/opallabs/cabochon && foreman start -m universe=1"
+alias start-juggernaut="cd $HOME/opallabs/cabochon && REDIS_HOST=localhost REDIS_PORT=6379 n use 5.2.0 packages/juggernaut/server.js --port $JUGGERNAUT_PORT"
+alias foreman-other="cd $HOME/opallabs/cabochon && foreman start -m all=1,techdocs=0,storybook=0,snapshots=0,web=0,universe=0,io=0,hydra=0,juggernaut=0"
+alias foreman-storybook="cd $HOME/opallabs/cabochon && foreman start -m storybook=1"

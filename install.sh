@@ -1,8 +1,3 @@
-# #!/bin/zsh
-# cp ~/dotfiles/.zshrc ~/.zshrc
-# source ~/.zshrc
-
-# Nicks approach
 #!/usr/bin/env bash
 
 echo "Installing dotfiles..."
